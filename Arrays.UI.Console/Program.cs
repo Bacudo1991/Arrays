@@ -1,19 +1,28 @@
 ﻿using Arrays.Logic;
 
 
-MyArray array = new(50000);
-array.Fill(1, 999999);
+
+MyArray array = new(1000);
+array.Fill(1, 200);
+array.Sort();
 Console.WriteLine(array);
-Console.WriteLine("=====================================");
-var date1 = DateTime.Now;
-var primes = array.GetPrimes();
-var date2 = DateTime.Now;
-var time = date2 - date1;
-primes.Sort();
-Console.WriteLine(primes);
-Console.WriteLine($"Time elapsed: {time.Minutes} minutes, {time.Seconds} seconds, {time.Milliseconds} milliseconds, {time.Nanoseconds} nanoseconds.");
+Console.WriteLine("=================================================");
+var nonRepeated = array.GetNonRepeated();
+nonRepeated.Sort();
+Console.WriteLine(nonRepeated);
 
-
+//:::::::::::::::::: GetPrimes method ::::::::::::::::::
+//MyArray array = new(50000);
+//array.Fill(1, 999999);
+//Console.WriteLine(array);
+//Console.WriteLine("=====================================");
+//var date1 = DateTime.Now;
+//var primes = array.GetPrimes();
+//var date2 = DateTime.Now;
+//var time = date2 - date1;
+//primes.Sort();
+//Console.WriteLine(primes);
+//Console.WriteLine($"Time elapsed: {time.Minutes} minutes, {time.Seconds} seconds, {time.Milliseconds} milliseconds, {time.Nanoseconds} nanoseconds.");
 
 
 //:::::::::::::::::: Array Sort Evens :::::::::::::::::::

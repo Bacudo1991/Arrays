@@ -136,9 +136,43 @@ public class MyArray
 
     }
 
-    private bool IsEven(int n)
+    public MyArray GetNonRepeated()
     {
-        return n % 2 == 0;
+        int nonRepeatedCount = 0;
+        for (int i = 0; i < _top; i++)
+        {
+            bool isRepeated = false;
+            for (int j = 0; j < _top; j++)
+            {
+                if (i != j && _array[i] == _array[j])
+                {
+                    isRepeated = true;
+                    break;
+                }
+            }
+            if (!isRepeated)
+            {
+                nonRepeatedCount++;
+            }
+        }
+        var nonRepeated = new MyArray(nonRepeatedCount);
+        for (int i = 0; i < _top; i++)
+        {
+            bool isRepeated = false;
+            for (int j = 0; j < _top; j++)
+            {
+                if (i != j && _array[i] == _array[j])
+                {
+                    isRepeated = true;
+                    break;
+                }
+            }
+            if (!isRepeated)
+            {
+                nonRepeated.Add(_array[i]);
+            }
+        }
+        return nonRepeated;
     }
 
     public override string ToString()
@@ -192,8 +226,14 @@ public class MyArray
         }
     }
 
+    private bool IsEven(int n)
+    {
+        return n % 2 == 0;
+    }
+    
     private bool IsPrime(int n)
     {
+        if (n == 1) return false;
         for (int i = 2; i <= Math.Sqrt(n); i++)
         {
             if (n % i == 0)
