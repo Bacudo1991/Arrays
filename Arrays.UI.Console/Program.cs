@@ -2,14 +2,14 @@
 
 
 
-MyArray array = new(1000);
-array.Fill(1, 200);
-array.Sort();
-Console.WriteLine(array);
-Console.WriteLine("=================================================");
-var nonRepeated = array.GetNonRepeated();
-nonRepeated.Sort();
-Console.WriteLine(nonRepeated);
+//MyArray array = new(1000);
+//array.Fill(1, 200);
+//array.Sort();
+//Console.WriteLine(array);
+//Console.WriteLine("=================================================");
+//var nonRepeated = array.GetNonRepeated();
+//nonRepeated.Sort();
+//Console.WriteLine(nonRepeated);
 
 //:::::::::::::::::: GetPrimes method ::::::::::::::::::
 //MyArray array = new(50000);

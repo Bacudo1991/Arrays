@@ -175,6 +175,40 @@ public class MyArray
         return nonRepeated;
     }
 
+    public MyArray GetMostRepeated()
+    {
+        int[,] matrixCount = new int[_top, 2];
+        int topMatrix = 0;
+
+        for (int i = 0; i < _top; i++)
+        {
+            int j = 0;
+            for (; j < topMatrix; j++)
+            {
+
+            }
+            if (j == _top)
+            {
+                matrixCount[topMatrix, 0] = _array[i];
+                matrixCount[topMatrix, 1] = 1;
+                topMatrix++;
+            }
+
+        }
+
+
+
+
+
+        for (int i = 0; i < _top; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+
+                }
+            }
+    }
+
     public override string ToString()
     {
         if (IsEmpty)
