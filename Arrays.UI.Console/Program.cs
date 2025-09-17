@@ -12,6 +12,9 @@ try
         option = Menu();
         switch (option)
         {
+            case 0:
+                Console.WriteLine(":::::::::: GAME OVER ::::::::::");
+                break;
             case 1:
                 Console.WriteLine();
                 Console.Write("Ingrese número de elementos: ");
