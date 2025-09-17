@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.Design;
-using Arrays.Logic;
+﻿using Arrays.Logic;
 
 
 try
 {
-    Console.WriteLine("::::::::::::::: WORKING WITH ARRAYS ::::::::::::::");
+    Console.WriteLine("\n::::::::::::::: WORKING WITH ARRAYS ::::::::::::::\n");
     int option;
     MyArray myArray = new(10);
     myArray.Fill();
@@ -14,40 +13,54 @@ try
         switch (option)
         {
             case 1:
+                Console.WriteLine();
                 Console.Write("Ingrese número de elementos: ");
                 var nString = Console.ReadLine();
                 int n = 10;
                 int.TryParse(nString, out n);
                 myArray = new(n);
                 myArray.Fill();
+                Console.WriteLine();
                 break;
             case 2:
+                Console.WriteLine();
                 Console.WriteLine("Arreglo: ");
                 myArray.Sort();
                 Console.WriteLine(myArray);
+                Console.WriteLine();
                 break;
             case 3:
+                Console.WriteLine();
                 Console.WriteLine("Números pares: ");
                 myArray.Sort();
                 Console.WriteLine(myArray.GetEvens());
+                Console.WriteLine();
                 break;
             case 4:
+                Console.WriteLine();
                 Console.WriteLine("Números primos: ");
                 myArray.Sort();
                 Console.WriteLine(myArray.GetPrimes());
+                Console.WriteLine();
                 break;
             case 5:
+                Console.WriteLine();
                 Console.WriteLine("Números que no se repiten: ");
                 myArray.Sort();
                 Console.WriteLine(myArray.GetNonRepeated());
+                Console.WriteLine();
                 break;
             case 6:
+                Console.WriteLine();
                 Console.WriteLine("Números mas repetidos: ");
                 myArray.Sort();
                 Console.WriteLine(myArray.GetMostRepeated());
+                Console.WriteLine();
                 break;
             default:
+                Console.WriteLine();
                 Console.WriteLine("Fuck you. Opción no valida");
+                Console.WriteLine();
                 break;                
         }
     } while (option != 0);
