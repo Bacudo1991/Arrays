@@ -1,37 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Arrays.Logic;
-
 public class MyArray
 {
     private int _top;           //Logic size
     private int[] _array;
-
     public MyArray(int n)
     {
         N = n;
         _array = new int[n];
         _top = 0;
     }
-
     public bool IsFull => _top == N;
-
     public bool IsEmpty => _top == 0;
-
-    public int N { get; }           //PROPIEDAD DE LECTURA - SOLO GET  -- Phisical size 
-
+    public int N { get; }           //PROPIEDAD DE LECTURA - SOLO GET  -- Phisical size
     public void Add(int number)
     {
         if (IsFull)
         {
             throw new Exception("The array is full.");
         }
-
         _array[_top] = number;
         _top++;
     }
-
-    public void Insert(int number, int position) 
+    public void Insert(int number, int position)
     {
         if (IsFull)
         {
@@ -45,7 +37,6 @@ public class MyArray
         {
             position = _top;
         }
-
         for (int i = _top; i > position; i--)
         {
             _array[i] = _array[i - 1];
@@ -53,7 +44,6 @@ public class MyArray
         _array[position] = number;
         _top++;
     }
-
     public void Remove(int position)
     {
         if (IsEmpty)
@@ -68,19 +58,16 @@ public class MyArray
         {
             position = _top;
         }
-
         for (int i = position; i < _top - 1; i++)
         {
             _array[i] = _array[i + 1];
         }
         _top--;
     }
-
     public void Fill()
     {
         Fill(1, 100);
     }
-
     public void Fill(int minimum, int maximum)
     {
         Random random = new();
@@ -91,7 +78,6 @@ public class MyArray
         }
         _top = N;
     }
-
     public MyArray GetPrimes()
     {
         int primesCount = 0;
@@ -112,7 +98,6 @@ public class MyArray
         }
         return primesArray;
     }
-
     public MyArray GetEvens()
     {
         var evensCount = 0;
@@ -123,7 +108,6 @@ public class MyArray
                 evensCount++;
             }
         }
-
         var evensArray = new MyArray(evensCount);
         for (int i = 0; i < _top; i++)
         {
@@ -133,9 +117,7 @@ public class MyArray
             }
         }
         return evensArray;
-
     }
-
     public MyArray GetNonRepeated()
     {
         int nonRepeatedCount = 0;
@@ -174,48 +156,20 @@ public class MyArray
         }
         return nonRepeated;
     }
-
     public MyArray GetMostRepeated()
     {
         int[,] matrixCount = new int[_top, 2];
-        int topMatrix = 0;
-
-        for (int i = 0; i < _top; i++)
-        {
-            int j = 0;
-            for (; j < topMatrix; j++)
-            {
-
-            }
-            if (j == _top)
-            {
-                matrixCount[topMatrix, 0] = _array[i];
-                matrixCount[topMatrix, 1] = 1;
-                topMatrix++;
-            }
-
-        }
-
-
-
-
-
-        for (int i = 0; i < _top; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-
-                }
-            }
+        int topMatrix = FillMatrixCount(matrixCount);
+        OrderMatrixCount(matrixCount, topMatrix);
+        int repeatedCounter = GetRepeatedCounter(matrixCount, topMatrix);
+        return FillMostRepeated(repeatedCounter, matrixCount);
     }
-
     public override string ToString()
     {
         if (IsEmpty)
         {
             return "Empty Array";
         }
-
         string output = string.Empty;
         var count = 0;
         for (int i = 0; i < _top; i++)
@@ -230,12 +184,10 @@ public class MyArray
         }
         return output;
     }
-
     public void Sort()
     {
         Sort(descending: false);
     }
-
     public void Sort(bool descending)
     {
         for (int i = 0; i < _top - 1; i++)
@@ -259,12 +211,10 @@ public class MyArray
             }
         }
     }
-
     private bool IsEven(int n)
     {
         return n % 2 == 0;
     }
-    
     private bool IsPrime(int n)
     {
         if (n == 1) return false;
@@ -276,12 +226,69 @@ public class MyArray
             }
         }
         return true;
-    }    
-
+    }
     private void Change(ref int a, ref int b)
     {
         int aux = a;
         a = b;
         b = aux;
+    }
+    private int FillMatrixCount(int[,] matrixCount)
+    {
+        int topMatrix = 0;
+        for (int i = 0; i < _top; i++)
+        {
+            int j = 0;
+            for (; j < topMatrix; j++)
+            {
+                if (_array[i] == matrixCount[j, 0])
+                {
+                    matrixCount[j, 1]++;
+                    break;
+                }
+            }
+            if (j == topMatrix)
+            {
+                matrixCount[topMatrix, 0] = _array[i];
+                matrixCount[topMatrix, 1] = 1;
+                topMatrix++;
+            }
+        }
+        return topMatrix;
+    }
+    private void OrderMatrixCount(int[,] matrixCount, int topMatrix)
+    {
+        for (int i = 0; i < topMatrix - 1; i++)
+        {
+            for (int j = i + 1; j < topMatrix; j++)
+            {
+                if (matrixCount[i, 1] < matrixCount[j, 1])
+                {
+                    Change(ref matrixCount[i, 0], ref matrixCount[j, 0]);
+                    Change(ref matrixCount[i, 1], ref matrixCount[j, 1]);
+                }
+            }
+        }
+    }
+    private int GetRepeatedCounter(int[,] matrixCount, int topMatrix)
+    {
+        int repeatedCounter = 1;
+        for (; repeatedCounter < topMatrix; repeatedCounter++)
+        {
+            if (matrixCount[0, 1] != matrixCount[repeatedCounter, 1])
+            {
+                break;
+            }
+        }
+        return repeatedCounter;
+    }
+    private MyArray FillMostRepeated(int repeatedCounter, int[,] matrixCount)
+    {
+        var mostRepeated = new MyArray(repeatedCounter);
+        for (int i = 0; i < repeatedCounter; i++)
+        {
+            mostRepeated.Add(matrixCount[i, 0]);
+        }
+        return mostRepeated;
     }
 }

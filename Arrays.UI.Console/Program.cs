@@ -1,29 +1,91 @@
-﻿using Arrays.Logic;
+﻿using System.ComponentModel.Design;
+using Arrays.Logic;
 
 
+try
+{
+    Console.WriteLine("::::::::::::::: WORKING WITH ARRAYS ::::::::::::::");
+    int option;
+    MyArray myArray = new(10);
+    myArray.Fill();
+    do
+    {
+        option = Menu();
+        switch (option)
+        {
+            case 1:
+                Console.Write("Ingrese número de elementos: ");
+                var nString = Console.ReadLine();
+                int n = 10;
+                int.TryParse(nString, out n);
+                myArray = new(n);
+                myArray.Fill();
+                break;
+            case 2:
+                Console.WriteLine("Arreglo: ");
+                myArray.Sort();
+                Console.WriteLine(myArray);
+                break;
+            case 3:
+                Console.WriteLine("Números pares: ");
+                myArray.Sort();
+                Console.WriteLine(myArray.GetEvens());
+                break;
+            case 4:
+                Console.WriteLine("Números primos: ");
+                myArray.Sort();
+                Console.WriteLine(myArray.GetPrimes());
+                break;
+            case 5:
+                Console.WriteLine("Números que no se repiten: ");
+                myArray.Sort();
+                Console.WriteLine(myArray.GetNonRepeated());
+                break;
+            case 6:
+                Console.WriteLine("Números mas repetidos: ");
+                myArray.Sort();
+                Console.WriteLine(myArray.GetMostRepeated());
+                break;
+            default:
+                Console.WriteLine("Fuck you. Opción no valida");
+                break;                
+        }
+    } while (option != 0);
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
 
-//MyArray array = new(1000);
-//array.Fill(1, 200);
-//array.Sort();
-//Console.WriteLine(array);
-//Console.WriteLine("=================================================");
-//var nonRepeated = array.GetNonRepeated();
-//nonRepeated.Sort();
-//Console.WriteLine(nonRepeated);
+int Menu()
+{
+    Console.WriteLine("1. Definir tamaño de arreglo");
+    Console.WriteLine("2. Mostrar arreglo");
+    Console.WriteLine("3. Mostrar números pares");
+    Console.WriteLine("4. Mostrar números primos");
+    Console.WriteLine("5. Mostrar números que no se repiten");
+    Console.WriteLine("6. Mostrar que más se repiten");
+    Console.WriteLine("0. Salir");
+    bool isValid = false;
+    int option = 0;
+    do
+    {
+        Console.Write("Digite su opción: ");
+        var optionString = Console.ReadLine();
 
-//:::::::::::::::::: GetPrimes method ::::::::::::::::::
-//MyArray array = new(50000);
-//array.Fill(1, 999999);
-//Console.WriteLine(array);
-//Console.WriteLine("=====================================");
-//var date1 = DateTime.Now;
-//var primes = array.GetPrimes();
-//var date2 = DateTime.Now;
-//var time = date2 - date1;
-//primes.Sort();
-//Console.WriteLine(primes);
-//Console.WriteLine($"Time elapsed: {time.Minutes} minutes, {time.Seconds} seconds, {time.Milliseconds} milliseconds, {time.Nanoseconds} nanoseconds.");
+        if (!int.TryParse(optionString, out option))
+        {
+            Console.WriteLine("Opción no valida, solo ingrese números");
+            isValid = false;
+        }
+        else
+        {
+            isValid = true;
+        }
+    } while (!isValid);
+    return option;
 
+}
 
 //:::::::::::::::::: Array Sort Evens :::::::::::::::::::
 //try
@@ -76,7 +138,7 @@
 //{
 //    Console.WriteLine(ex.Message);
 //}
-    
+
 
 //:::::::::::: Sort array :::::::::::::::
 //MyArray array = new(5);
